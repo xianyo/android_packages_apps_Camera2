@@ -14,6 +14,11 @@
  * limitations under the License.
  */
 
+/*
+ * Copyright (C) 2014 Freescale Semiconductor, Inc.
+ */
+
+
 package com.android.camera;
 
 import android.annotation.TargetApi;
@@ -1464,15 +1469,17 @@ public class VideoModule implements CameraModule,
     @SuppressWarnings("deprecation")
     private void setCameraParameters() {
         mParameters.setPreviewSize(mDesiredPreviewWidth, mDesiredPreviewHeight);
-        mParameters.set("video-size", mProfile.videoFrameWidth+"x"+mProfile.videoFrameHeight);
-        int[] fpsRange = CameraUtil.getMaxPreviewFpsRange(mParameters);
+       /* int[] fpsRange = CameraUtil.getMaxPreviewFpsRange(mParameters);
         if (fpsRange.length > 0) {
             mParameters.setPreviewFpsRange(
                     fpsRange[Parameters.PREVIEW_FPS_MIN_INDEX],
                     fpsRange[Parameters.PREVIEW_FPS_MAX_INDEX]);
         } else {
             mParameters.setPreviewFrameRate(mProfile.videoFrameRate);
-        }
+        } */
+
+	    //make sure record frame rate is 30 fps
+		mParameters.setPreviewFrameRate(mProfile.videoFrameRate);
 
         forceFlashOffIfSupported(!mUI.isVisible());
 
