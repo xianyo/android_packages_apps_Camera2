@@ -14,6 +14,11 @@
  * limitations under the License.
  */
 
+/*
+ * Copyright (C) 2014 Freescale Semiconductor, Inc.
+ */
+
+
 package com.android.camera;
 
 import android.annotation.TargetApi;
@@ -1632,6 +1637,7 @@ public class VideoModule extends CameraModule
         } else {
             mCameraSettings.setPreviewFrameRate(mProfile.videoFrameRate);
         }
+
 
         enableTorchMode(Keys.isCameraBackFacing(settingsManager, mAppController.getModuleScope()));
 
