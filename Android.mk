@@ -1,4 +1,5 @@
 ifeq ($(HAVE_FSL_IMX_GPU3D),true)
+ifeq ($(BOARD_HAVE_VPU),true)
 LOCAL_PATH:= $(call my-dir)
 
 include $(CLEAR_VARS)
@@ -36,4 +37,5 @@ LOCAL_JNI_SHARED_LIBRARIES := libjni_tinyplanet libjni_jpegutil
 include $(BUILD_PACKAGE)
 
 include $(call all-makefiles-under, $(LOCAL_PATH))
+endif
 endif
