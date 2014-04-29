@@ -766,6 +766,21 @@ public class VideoModule extends CameraModule
             quality = CamcorderProfile.QUALITY_HIGH;
         }
         mProfile = CamcorderProfile.get(mCameraId, quality);
+
+		//For TVIN, either 720x576 or 720x480, media_profile can't give a suitable resolution,
+		//so change the profile value.
+		List<Size> sizes = mParameters.getSupportedPreviewSizes();
+		if( (sizes.size() == 1 ) &&
+			( (sizes.get(0).width != mProfile.videoFrameWidth) || (sizes.get(0).height != mProfile.videoFrameHeight) ) ) {
+			Log.w(TAG, "Only support one preview resolution diff with profile, change profile frome " +
+				mProfile.videoFrameWidth + "x" + mProfile.videoFrameHeight + " to " +
+				sizes.get(0).width + "x" + sizes.get(0).height);
+
+			mProfile.videoFrameWidth = sizes.get(0).width;
+			mProfile.videoFrameHeight = sizes.get(0).height;
+		}
+
+        getDesiredPreviewSize();
         mPreferenceRead = true;
     }
 
