@@ -827,7 +827,8 @@ public class VideoModule extends CameraModule
      */
     private static Point getDesiredPreviewSize(Context context, CameraSettings settings,
             CameraCapabilities capabilities, CamcorderProfile profile, Point previewScreenSize) {
-        if (capabilities.getSupportedVideoSizes() == null) {
+        List<Size> videoSizes = capabilities.getSupportedVideoSizes();
+        if (videoSizes == null || videoSizes.size() == 0) {
             // Driver doesn't support separate outputs for preview and video.
             return new Point(profile.videoFrameWidth, profile.videoFrameHeight);
         }
