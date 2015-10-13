@@ -769,7 +769,7 @@ public class VideoModule extends CameraModule
 
 		//For TVIN, either 720x576 or 720x480, media_profile can't give a suitable resolution,
 		//so change the profile value.
-		List<Size> sizes = mCameraCapabilities.getSupportedPreviewSizes();
+		List<Size> sizes = Size.convert(mCameraCapabilities.getSupportedPreviewSizes());
 		if( (sizes.size() == 1 ) &&
 			( (sizes.get(0).width() != mProfile.videoFrameWidth) || (sizes.get(0).height() != mProfile.videoFrameHeight) ) ) {
 			Log.w(TAG, "Only support one preview resolution diff with profile, change profile frome " +
@@ -822,7 +822,7 @@ public class VideoModule extends CameraModule
      */
     private static Point getDesiredPreviewSize(CameraCapabilities capabilities,
           CamcorderProfile profile, Point previewScreenSize) {
-        List<Size> videoSizes = capabilities.getSupportedVideoSizes();
+        List<Size> videoSizes = Size.convert(capabilities.getSupportedVideoSizes());
         if (videoSizes == null || videoSizes.size() == 0) {
             // Driver doesn't support separate outputs for preview and video.
             return new Point(profile.videoFrameWidth, profile.videoFrameHeight);
